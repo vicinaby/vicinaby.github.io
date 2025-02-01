@@ -1,25 +1,21 @@
 ---
 layout: default
+call_to_action: Contact
+background_image_path:
 ---
 
-<h1>
-  {{ page.title }}
-</h1>
+{% if page.title %}
+	<div class="page-header">
+		<h2>{{ page.title }} Blog</h2>
+	</div>
+{% endif %}
 
-<ul class="posts-container">
-  {% for post in site.posts %}
-    {% unless post.next %}
-      <h3>{{ post.date | date: '%Y' }}</h3>
-    {% else %}
-      {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
-      {% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
-      {% if year != nyear %}
-        <h3>{{ post.date | date: '%Y' }}</h3>
-      {% endif %}
-    {% endunless %}
-    <li itemscope>
-      <a href="{{ site.github.url }}{{ post.url }}">{{ post.title }}</a>
-      <p class="post-date"><span><i class="fa fa-calendar" aria-hidden="true"></i> {{ post.date | date: "%B %-d" }} - <i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</span></p>
-    </li>
-  {% endfor %}
-</ul>
+<article class="content">
+	<p class="editable">You're currently looking at posts categorised under <strong>{{ page.title }}</strong>. <a href="{{ site.baseurl }}/blog/">View all posts</a> instead.</p>
+
+	<ol class="post-list">
+		{% for post in page.posts %}
+			{% include post-summary.html post=post %}
+		{% endfor %}
+	</ol>
+</article>
