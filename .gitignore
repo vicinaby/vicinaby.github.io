@@ -2,3 +2,4 @@
 _site/
 docker/
 vendor/
+.DS_Store
